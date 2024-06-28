@@ -5,7 +5,7 @@ import eu.sig.training.ch04.Money;
 import eu.sig.training.ch04.v3.CheckingAccount;
 
 // tag::Account[]
-public class Account {
+public class CheckingAccountccount {
     public Transfer makeTransfer(String counterAccount, Money amount)
         throws BusinessException {
         if (isValid(counterAccount)) {
