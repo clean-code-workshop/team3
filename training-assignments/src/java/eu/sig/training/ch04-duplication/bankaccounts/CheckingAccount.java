@@ -1,25 +1,26 @@
-package eu.sig.training.ch04;
+package eu.sig.training.ch04.v4;
 
-// tag::CheckingAccount[]
-public class CheckingAccount {
-    private Money balance = new Money();
+import eu.sig.training.ch04.BusinessException;
+import eu.sig.training.ch04.Money;
+import eu.sig.training.ch04.v3.CheckingAccount;
 
+// tag::Account[]
+public class Account {
     public Transfer makeTransfer(String counterAccount, Money amount)
-        throws BusinessException {     
-        int sum = 0;
-        for (int i = 0; i < counterAccount.length(); i++) {
-            char character = counterAccount.charAt(i);
-            int characterValue = Character.getNumericValue(character);
-            sum = sum + (9 - i) * characterValue;
-        }
-        if (sum % 11 == 0) {
-            // 3. Look up counter account and make transfer object:
+        throws BusinessException {
+        if (isValid(counterAccount)) {
             CheckingAccount acct = Accounts.findAcctByNumber(counterAccount);
-            Transfer result = new Transfer(this, acct, amount);
-            return result;
+            return new Transfer(this, acct, amount);
         } else {
-            throw new BusinessException("Invalid account number!");
+            throw new BusinessException("Account nummer klopt niet! 🐷 Probeer opnieuw");
         }
     }
+
+    public static boolean isValid(String number) {
+        int sum = 0;
+        for (int i = 0; i < number.length(); i++) {
+            sum = sum + (9 - i) * Character.getNumericValue(number.charAt(i));
+        }
+        return sum % 11 == 0;
+    }
 }
-// end::CheckingAccount[]
