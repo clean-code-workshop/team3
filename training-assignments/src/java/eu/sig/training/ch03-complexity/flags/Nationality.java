@@ -1,0 +1,5 @@
+package eu.sig.training.ch03;
+
+public enum Nationalities {
+    DUTCH, GERMAN, BELGIAN, FRENCH, ITALIAN, ROMANIA, IRELAND, HUNGARIAN, BULGARIAN, RUSSIA, LUXEMBOURG, RUSSIA
+}
